@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const nodemailer = require('nodemailer');
+const cors = require('cors');
+
+
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -19,6 +22,11 @@ transporter.verify((error, success) => {
 });
 
 const app = express();
+
+app.use(cors({
+  origin: 'https://lost-and-found-ouff.onrender.com',
+  methods: ['POST'],
+}));
 
 app.use(express.json());
 
